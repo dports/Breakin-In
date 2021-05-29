@@ -1,0 +1,51 @@
+name: .NET
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+    - name: Publish
+      run: dotnet publish --configuration Debug --framework net5.0 --runtime linux-x64 --self-contained true
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@latest
+      with:
+        name: Breakin-In Linux x64
+        path: /home/runner/work/Breakin-In/Breakin-In/BreakinIn/bin/Debug/net5.0/linux-x64/publish/
+  build-windows:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+    - name: Publish
+      run: dotnet publish --configuration Debug --framework net5.0 --runtime win-x64 --self-contained true
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@latest
+      with:
+        name: Breakin-In Windows x64
+        path: D:\a\Breakin-In\Breakin-In\BreakinIn\bin\Debug\net5.0\win-x64\publish\
