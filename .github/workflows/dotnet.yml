@@ -24,7 +24,7 @@ jobs:
     - name: Publish
       run: dotnet publish --configuration Debug --framework net5.0 --runtime linux-x64 --self-contained true
     - name: Upload a Build Artifact
-      uses: actions/upload-artifact@latest
+      uses: actions/upload-artifact@master
       with:
         name: Breakin-In Linux x64
         path: /home/runner/work/Breakin-In/Breakin-In/BreakinIn/bin/Debug/net5.0/linux-x64/publish/
@@ -45,7 +45,7 @@ jobs:
     - name: Publish
       run: dotnet publish --configuration Debug --framework net5.0 --runtime win-x64 --self-contained true
     - name: Upload a Build Artifact
-      uses: actions/upload-artifact@latest
+      uses: actions/upload-artifact@master
       with:
         name: Breakin-In Windows x64
         path: D:\a\Breakin-In\Breakin-In\BreakinIn\bin\Debug\net5.0\win-x64\publish\
